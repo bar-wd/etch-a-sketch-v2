@@ -18,11 +18,20 @@ body {
   border-color: black;
   height: 500px;
   width: 500px;
+  display: flex;
+  flex-direction: column;
 }
 
 .new-div {
   border-style: solid;
-  border-color: black;
-  height: 50px;
-  width: 50px;
+  border-color: rgba(0, 0, 0, 0.33);
+  flex: 1;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  display: flex;
 }

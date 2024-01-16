@@ -5,14 +5,16 @@
 const container = document.querySelector('.container');
 
 function makeGrid(num) {
-  let tracker = num;
-
-  while (tracker > 0) {
-    let newDiv = document.createElement('div');
-    newDiv.classList.add('new-div');
-    container.appendChild(newDiv);
-    tracker--;
+  for (let i = 0; i < num; i++) {
+    let newRow = document.createElement('div');
+    newRow.classList.add('new-div', 'row');
+    container.appendChild(newRow);
+    for (let j = 0; j < num; j++) {
+      let newColumn = document.createElement('div');
+      newColumn.classList.add('new-div', 'column');
+      newRow.appendChild(newColumn);
+    }
   }
 }
 
-makeGrid(5);
+makeGrid(9);
