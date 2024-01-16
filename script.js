@@ -1,7 +1,5 @@
 'use-strict';
 
-// Make grid first using js
-
 const container = document.querySelector('.container');
 
 function makeGrid(num) {

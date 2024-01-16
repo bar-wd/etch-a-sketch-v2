@@ -11,15 +11,34 @@ html {
 
 body {
   min-height: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.middle-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
 }
 
 .container {
   border-style: solid;
   border-color: black;
-  height: 500px;
-  width: 500px;
+  height: 300px;
+  width: 300px;
   display: flex;
   flex-direction: column;
+}
+
+.options {
+  transform: translate(-100px);
 }
 
 .new-div {
@@ -33,5 +52,4 @@ body {
 }
 
 .column {
-  display: flex;
 }
