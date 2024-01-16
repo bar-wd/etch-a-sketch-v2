@@ -5,7 +5,10 @@
 
 let target;
 let mouseDown = false;
+let columnAll;
 const container = document.querySelector('.container');
+const column = document.querySelector('.column');
+const clear = document.querySelector('.clear');
 
 ///////////////////////////////////////////////////////////
 // Event Listeners
@@ -26,6 +29,8 @@ window.addEventListener('mouseup', e => {
   mouseDown = false;
 });
 
+clear.addEventListener('click', clearGrid);
+
 ///////////////////////////////////////////////////////////
 // Functions
 
@@ -40,6 +45,7 @@ function makeGrid(num) {
       newRow.appendChild(newColumn);
     }
   }
+  columnAll = document.querySelectorAll('.column');
 }
 
 function mouseOver(e) {
@@ -51,4 +57,12 @@ function mouseOver(e) {
   }
 }
 
+function clearGrid() {
+  columnAll.forEach(each => {
+    each.classList.remove('black');
+  });
+}
+
 makeGrid(9);
+
+console.log(columnAll);
