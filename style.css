@@ -28,6 +28,12 @@ body {
   flex: 1;
 }
 
+.options-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .container {
   border-style: solid;
   border-color: black;
@@ -39,6 +45,10 @@ body {
 
 .options {
   transform: translate(-100px);
+  border-style: solid;
+  border-color: black;
+  padding: 5px;
+  text-align: center;
 }
 
 .new-div {
