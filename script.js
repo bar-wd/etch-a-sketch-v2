@@ -2,13 +2,17 @@
 
 ///////////////////////////////////////////////////////////
 // Variables
-
+let state = 0;
 let target;
 let mouseDown = false;
 let columnAll;
+let rows;
+let sliderValue;
 const container = document.querySelector('.container');
 const column = document.querySelector('.column');
 const clear = document.querySelector('.clear');
+const slider = document.querySelector('.slider');
+const sliderInput = document.querySelector('input');
 
 ///////////////////////////////////////////////////////////
 // Event Listeners
@@ -29,12 +33,32 @@ window.addEventListener('mouseup', e => {
   mouseDown = false;
 });
 
+// clear.addEventListener('click', clearGrid);
+
 clear.addEventListener('click', clearGrid);
+
+// slider.addEventListener('mouseup', e => {
+//   sliderValue.innerText = parseInt(sliderValue.innerText);
+// });
+
+slider.addEventListener('mouseup', e => {
+  sliderValue = parseInt(sliderInput.value);
+});
+
+slider.addEventListener('click', makeGrid);
+
+// slider.addEventListener('click', e => {
+//   console.log(state);
+// });
 
 ///////////////////////////////////////////////////////////
 // Functions
 
 function makeGrid(num) {
+  num = sliderValue;
+
+  if (state === 1) deleteGrid();
+
   for (let i = 0; i < num; i++) {
     let newRow = document.createElement('div');
     newRow.classList.add('new-div', 'row');
@@ -45,7 +69,9 @@ function makeGrid(num) {
       newRow.appendChild(newColumn);
     }
   }
-  columnAll = document.querySelectorAll('.column');
+  selectColumns();
+  selectRows();
+  state = 1;
 }
 
 function mouseOver(e) {
@@ -63,6 +89,18 @@ function clearGrid() {
   });
 }
 
-makeGrid(9);
+function deleteGrid() {
+  rows.forEach(row => {
+    row.remove();
+  });
+}
 
-console.log(columnAll);
+function selectColumns() {
+  columnAll = document.querySelectorAll('.column');
+}
+
+function selectRows() {
+  rows = document.querySelectorAll('.row');
+}
+
+makeGrid(6);

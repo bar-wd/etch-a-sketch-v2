@@ -67,3 +67,7 @@ body {
 .black {
   background-color: black;
 }
+
+.slider {
+  transform: translate(-100px);
+}
