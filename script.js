@@ -16,3 +16,16 @@ function makeGrid(num) {
 }
 
 makeGrid(9);
+
+container.addEventListener('click', e => {
+  let targetClassList = e.target.classList;
+
+  if (
+    targetClassList.contains('row') ||
+    targetClassList.contains('container')
+  ) {
+    return;
+  }
+
+  targetClassList.add('black');
+});
