@@ -7,7 +7,7 @@ let target;
 let mouseDown = false;
 let columnAll;
 let rows;
-let sliderValue;
+let sliderValue = 25;
 const container = document.querySelector('.container');
 const column = document.querySelector('.column');
 const clear = document.querySelector('.clear');
@@ -17,15 +17,7 @@ const sliderInput = document.querySelector('input');
 ///////////////////////////////////////////////////////////
 // Event Listeners
 
-container.addEventListener('mousedown', e => {
-  e.preventDefault();
-  mouseDown = true;
-  target = e.target.classList;
-
-  if (target.contains('column')) {
-    target.add('black');
-  }
-});
+container.addEventListener('mousedown', changeGridColor);
 
 container.addEventListener('mouseover', mouseOver);
 
@@ -33,23 +25,11 @@ window.addEventListener('mouseup', e => {
   mouseDown = false;
 });
 
-// clear.addEventListener('click', clearGrid);
-
 clear.addEventListener('click', clearGrid);
 
-// slider.addEventListener('mouseup', e => {
-//   sliderValue.innerText = parseInt(sliderValue.innerText);
-// });
-
-slider.addEventListener('mouseup', e => {
-  sliderValue = parseInt(sliderInput.value);
-});
+slider.addEventListener('mouseup', getSliderValue);
 
 slider.addEventListener('click', makeGrid);
-
-// slider.addEventListener('click', e => {
-//   console.log(state);
-// });
 
 ///////////////////////////////////////////////////////////
 // Functions
@@ -57,7 +37,9 @@ slider.addEventListener('click', makeGrid);
 function makeGrid(num) {
   num = sliderValue;
 
-  if (state === 1) deleteGrid();
+  if (state === 1) {
+    deleteGrid();
+  }
 
   for (let i = 0; i < num; i++) {
     let newRow = document.createElement('div');
@@ -83,6 +65,16 @@ function mouseOver(e) {
   }
 }
 
+function changeGridColor(e) {
+  e.preventDefault();
+  mouseDown = true;
+  target = e.target.classList;
+
+  if (target.contains('column')) {
+    target.add('black');
+  }
+}
+
 function clearGrid() {
   columnAll.forEach(each => {
     each.classList.remove('black');
@@ -103,4 +95,8 @@ function selectRows() {
   rows = document.querySelectorAll('.row');
 }
 
-makeGrid(6);
+function getSliderValue() {
+  sliderValue = parseInt(sliderInput.value);
+}
+
+makeGrid(25);
