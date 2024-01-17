@@ -9,6 +9,8 @@ let columnAll;
 let rows;
 let sliderValue = 25;
 let black = true;
+let rainbow = false;
+let rgb;
 const container = document.querySelector('.container');
 const column = document.querySelector('.column');
 const clear = document.querySelector('.clear');
@@ -16,6 +18,7 @@ const slider = document.querySelector('.slider');
 const sliderInput = document.querySelector('input');
 const blackDiv = document.querySelector('.black-div');
 const whiteDiv = document.querySelector('.white-div');
+const rainbowDiv = document.querySelector('.rainbow-div');
 
 ///////////////////////////////////////////////////////////
 // Event Listeners
@@ -37,6 +40,8 @@ slider.addEventListener('click', makeGrid);
 blackDiv.addEventListener('click', makeBlack);
 
 whiteDiv.addEventListener('click', makeWhite);
+
+rainbowDiv.addEventListener('click', makeRainbow);
 
 ///////////////////////////////////////////////////////////
 // Functions
@@ -67,6 +72,8 @@ function mouseOver(e) {
   target = e.target.classList;
   if (mouseDown === false) {
     return;
+  } else if (target.contains('column') && rainbow === true) {
+    e.target.style.backgroundColor = `rgb(${generateRandomNumber()}, ${generateRandomNumber()}, ${generateRandomNumber()})`;
   } else if (target.contains('column') && black === true) {
     target.add('black');
   } else if (target.contains('column') && black === false) {
@@ -79,7 +86,9 @@ function changeGridColor(e) {
   mouseDown = true;
   target = e.target.classList;
 
-  if (target.contains('column') && black === true) {
+  if (target.contains('column') && rainbow === true) {
+    e.target.style.backgroundColor = `rgb(${generateRandomNumber()}, ${generateRandomNumber()}, ${generateRandomNumber()})`;
+  } else if (target.contains('column') && black === true) {
     target.add('black');
   }
 }
@@ -88,6 +97,10 @@ function clearGrid() {
   columnAll.forEach(each => {
     each.classList.remove('black');
   });
+  clear.classList.add('selected');
+  setTimeout(function () {
+    clear.classList.remove('selected');
+  }, 200);
 }
 
 function deleteGrid() {
@@ -110,14 +123,29 @@ function getSliderValue() {
 
 function makeBlack() {
   black = true;
+  rainbow = false;
   blackDiv.classList.add('selected');
   whiteDiv.classList.remove('selected');
+  rainbowDiv.classList.remove('selected');
 }
 
 function makeWhite() {
   black = false;
-  blackDiv.classList.remove('selected');
+  rainbow = false;
   whiteDiv.classList.add('selected');
+  blackDiv.classList.remove('selected');
+  rainbowDiv.classList.remove('selected');
+}
+
+function makeRainbow() {
+  rainbow = true;
+  rainbowDiv.classList.add('selected');
+  whiteDiv.classList.remove('selected');
+  blackDiv.classList.remove('selected');
+}
+
+function generateRandomNumber() {
+  return Math.floor(Math.random() * 255) + 1;
 }
 
 makeGrid(25);
