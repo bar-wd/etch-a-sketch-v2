@@ -8,11 +8,14 @@ let mouseDown = false;
 let columnAll;
 let rows;
 let sliderValue = 25;
+let black = true;
 const container = document.querySelector('.container');
 const column = document.querySelector('.column');
 const clear = document.querySelector('.clear');
 const slider = document.querySelector('.slider');
 const sliderInput = document.querySelector('input');
+const blackDiv = document.querySelector('.black-div');
+const whiteDiv = document.querySelector('.white-div');
 
 ///////////////////////////////////////////////////////////
 // Event Listeners
@@ -30,6 +33,10 @@ clear.addEventListener('click', clearGrid);
 slider.addEventListener('mouseup', getSliderValue);
 
 slider.addEventListener('click', makeGrid);
+
+blackDiv.addEventListener('click', makeBlack);
+
+whiteDiv.addEventListener('click', makeWhite);
 
 ///////////////////////////////////////////////////////////
 // Functions
@@ -60,8 +67,10 @@ function mouseOver(e) {
   target = e.target.classList;
   if (mouseDown === false) {
     return;
-  } else if (target.contains('column')) {
+  } else if (target.contains('column') && black === true) {
     target.add('black');
+  } else if (target.contains('column') && black === false) {
+    target.add('white');
   }
 }
 
@@ -70,7 +79,7 @@ function changeGridColor(e) {
   mouseDown = true;
   target = e.target.classList;
 
-  if (target.contains('column')) {
+  if (target.contains('column') && black === true) {
     target.add('black');
   }
 }
@@ -97,6 +106,16 @@ function selectRows() {
 
 function getSliderValue() {
   sliderValue = parseInt(sliderInput.value);
+}
+
+function makeBlack() {
+  black = true;
+  console.log(black);
+}
+
+function makeWhite() {
+  black = false;
+  console.log(black);
 }
 
 makeGrid(25);
