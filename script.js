@@ -110,12 +110,14 @@ function getSliderValue() {
 
 function makeBlack() {
   black = true;
-  console.log(black);
+  blackDiv.classList.add('selected');
+  whiteDiv.classList.remove('selected');
 }
 
 function makeWhite() {
   black = false;
-  console.log(black);
+  blackDiv.classList.remove('selected');
+  whiteDiv.classList.add('selected');
 }
 
 makeGrid(25);

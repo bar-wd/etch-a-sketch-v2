@@ -91,3 +91,9 @@ input::-webkit-slider-thumb {
   background: black;
   cursor: pointer;
 }
+
+.selected {
+  color: #efefef;
+  text-shadow: -1px -1px 0px #777, -1px -1px 0px #777;
+  box-shadow: inset 1px 1px 4px #222;
+}
