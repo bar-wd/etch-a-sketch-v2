@@ -10,7 +10,6 @@ let rows;
 let sliderValue = 25;
 let black = true;
 let rainbow = false;
-let rgb;
 const container = document.querySelector('.container');
 const column = document.querySelector('.column');
 const clear = document.querySelector('.clear');
@@ -49,9 +48,13 @@ function mouseOver(e) {
   target = e.target.classList;
   if (mouseDown === false) {
     return;
+  }
+  if (target.contains('black') || target.contains('rainbow-color')) {
+    return;
   } else if (target.contains('column') && rainbow === true) {
     e.target.style.backgroundColor = `rgb(${generateRandomNumber()}, ${generateRandomNumber()}, ${generateRandomNumber()})`;
   } else if (target.contains('column') && black === true) {
+    e.target.style.backgroundColor = 'black';
     target.add('black');
   } else if (target.contains('column') && black === false) {
     e.target.style.backgroundColor = 'white';
@@ -63,9 +66,13 @@ function changeGridColor(e) {
   mouseDown = true;
   target = e.target.classList;
 
-  if (target.contains('column') && rainbow === true) {
+  if (target.contains('black') || target.contains('rainbow-color')) {
+    return;
+  } else if (target.contains('column') && rainbow === true) {
     e.target.style.backgroundColor = `rgb(${generateRandomNumber()}, ${generateRandomNumber()}, ${generateRandomNumber()})`;
+    target.add('rainbow-color');
   } else if (target.contains('column') && black === true) {
+    e.target.style.backgroundColor = 'black';
     target.add('black');
   } else if (target.contains('column') && black === false) {
     e.target.style.backgroundColor = 'white';
@@ -73,8 +80,11 @@ function changeGridColor(e) {
 }
 
 function clearGrid() {
+  selectColumns();
   columnAll.forEach(each => {
     each.style.backgroundColor = 'white';
+    each.classList.remove('black');
+    each.classList.remove('rainbow-color');
   });
   clear.classList.add('selected');
   setTimeout(function () {
