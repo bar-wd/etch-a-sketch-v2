@@ -53,6 +53,7 @@ function mouseOver(e) {
     return;
   } else if (target.contains('column') && rainbow === true) {
     e.target.style.backgroundColor = `rgb(${generateRandomNumber()}, ${generateRandomNumber()}, ${generateRandomNumber()})`;
+    target.add('rainbow-color');
   } else if (target.contains('column') && black === true) {
     e.target.style.backgroundColor = 'black';
     target.add('black');
@@ -65,7 +66,6 @@ function changeGridColor(e) {
   e.preventDefault();
   mouseDown = true;
   target = e.target.classList;
-
   if (target.contains('black') || target.contains('rainbow-color')) {
     return;
   } else if (target.contains('column') && rainbow === true) {
