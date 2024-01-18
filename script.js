@@ -74,7 +74,7 @@ function changeGridColor(e) {
 
 function clearGrid() {
   columnAll.forEach(each => {
-    each.classList.remove('black');
+    each.style.backgroundColor = 'white';
   });
   clear.classList.add('selected');
   setTimeout(function () {
