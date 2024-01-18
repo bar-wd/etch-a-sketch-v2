@@ -49,7 +49,9 @@ function mouseOver(e) {
   if (mouseDown === false) {
     return;
   }
-  if (target.contains('black') || target.contains('rainbow-color')) {
+  if (target.contains('column') && black === false && rainbow === false) {
+    e.target.style.backgroundColor = 'white';
+  } else if (target.contains('black') || target.contains('rainbow-color')) {
     return;
   } else if (target.contains('column') && rainbow === true) {
     e.target.style.backgroundColor = `rgb(${generateRandomNumber()}, ${generateRandomNumber()}, ${generateRandomNumber()})`;
@@ -57,8 +59,6 @@ function mouseOver(e) {
   } else if (target.contains('column') && black === true) {
     e.target.style.backgroundColor = 'black';
     target.add('black');
-  } else if (target.contains('column') && black === false) {
-    e.target.style.backgroundColor = 'white';
   }
 }
 
@@ -66,7 +66,10 @@ function changeGridColor(e) {
   e.preventDefault();
   mouseDown = true;
   target = e.target.classList;
-  if (target.contains('black') || target.contains('rainbow-color')) {
+
+  if (target.contains('column') && black === false && rainbow === false) {
+    e.target.style.backgroundColor = 'white';
+  } else if (target.contains('black') || target.contains('rainbow-color')) {
     return;
   } else if (target.contains('column') && rainbow === true) {
     e.target.style.backgroundColor = `rgb(${generateRandomNumber()}, ${generateRandomNumber()}, ${generateRandomNumber()})`;
@@ -74,8 +77,6 @@ function changeGridColor(e) {
   } else if (target.contains('column') && black === true) {
     e.target.style.backgroundColor = 'black';
     target.add('black');
-  } else if (target.contains('column') && black === false) {
-    e.target.style.backgroundColor = 'white';
   }
 }
 
@@ -124,8 +125,6 @@ function makeWhite() {
   blackDiv.classList.remove('selected');
   rainbowDiv.classList.remove('selected');
   whiteDiv.classList.add('selected');
-  console.log(black);
-  console.log(rainbow);
 }
 
 function makeRainbow() {
