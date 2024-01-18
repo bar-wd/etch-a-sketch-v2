@@ -21,29 +21,6 @@ const whiteDiv = document.querySelector('.white-div');
 const rainbowDiv = document.querySelector('.rainbow-div');
 
 ///////////////////////////////////////////////////////////
-// Event Listeners
-
-container.addEventListener('mousedown', changeGridColor);
-
-container.addEventListener('mouseover', mouseOver);
-
-window.addEventListener('mouseup', e => {
-  mouseDown = false;
-});
-
-clear.addEventListener('click', clearGrid);
-
-slider.addEventListener('mouseup', getSliderValue);
-
-slider.addEventListener('click', makeGrid);
-
-blackDiv.addEventListener('click', makeBlack);
-
-whiteDiv.addEventListener('click', makeWhite);
-
-rainbowDiv.addEventListener('click', makeRainbow);
-
-///////////////////////////////////////////////////////////
 // Functions
 
 function makeGrid(num) {
@@ -77,7 +54,7 @@ function mouseOver(e) {
   } else if (target.contains('column') && black === true) {
     target.add('black');
   } else if (target.contains('column') && black === false) {
-    target.add('white');
+    e.target.style.backgroundColor = 'white';
   }
 }
 
@@ -90,6 +67,8 @@ function changeGridColor(e) {
     e.target.style.backgroundColor = `rgb(${generateRandomNumber()}, ${generateRandomNumber()}, ${generateRandomNumber()})`;
   } else if (target.contains('column') && black === true) {
     target.add('black');
+  } else if (target.contains('column') && black === false) {
+    e.target.style.backgroundColor = 'white';
   }
 }
 
@@ -124,24 +103,26 @@ function getSliderValue() {
 function makeBlack() {
   black = true;
   rainbow = false;
-  blackDiv.classList.add('selected');
   whiteDiv.classList.remove('selected');
   rainbowDiv.classList.remove('selected');
+  blackDiv.classList.add('selected');
 }
 
 function makeWhite() {
   black = false;
   rainbow = false;
-  whiteDiv.classList.add('selected');
   blackDiv.classList.remove('selected');
   rainbowDiv.classList.remove('selected');
+  whiteDiv.classList.add('selected');
+  console.log(black);
+  console.log(rainbow);
 }
 
 function makeRainbow() {
   rainbow = true;
-  rainbowDiv.classList.add('selected');
   whiteDiv.classList.remove('selected');
   blackDiv.classList.remove('selected');
+  rainbowDiv.classList.add('selected');
 }
 
 function generateRandomNumber() {
@@ -149,3 +130,25 @@ function generateRandomNumber() {
 }
 
 makeGrid(25);
+
+///////////////////////////////////////////////////////////
+// Event Listeners
+container.addEventListener('mousedown', changeGridColor);
+
+container.addEventListener('mouseover', mouseOver);
+
+window.addEventListener('mouseup', e => {
+  mouseDown = false;
+});
+
+clear.addEventListener('click', clearGrid);
+
+slider.addEventListener('mouseup', getSliderValue);
+
+slider.addEventListener('click', makeGrid);
+
+blackDiv.addEventListener('click', makeBlack);
+
+whiteDiv.addEventListener('click', makeWhite);
+
+rainbowDiv.addEventListener('click', makeRainbow);
